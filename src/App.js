@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import "./App.css";
+import { db } from "./firebase/Config";
+import Editor from "./editor/Editor";
+import Sidebar from "./sidebar/Sidebar";
+import Sidebaritem from "./sidebaritem/Sidebaritem";
 
 function App() {
+  const [selectedNoteIndex, setSelectedNoteIndex] = useState(null);
+  const [selectedNote, setSelectedNote] = useState(null);
+  const [notes, setNotes] = useState([]);
+
+  useEffect(() => {
+    db.collection("notes").onSnapshot((snap) => {
+      let documents = [];
+      snap.forEach((doc) => {
+        documents.push({ ...doc.data(), id: doc.id });
+      });
+      setNotes(documents);
+    });
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Sidebar />
+      <Editor />
     </div>
   );
 }
