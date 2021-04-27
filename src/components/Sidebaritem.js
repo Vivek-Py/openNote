@@ -3,15 +3,16 @@ import { withStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { removeHTMLTags } from "../helpers";
+import { removeHTMLTags } from "../other/helpers";
+import styles from "../styles/sidebarItemStyles";
 
 const Sidebaritem = (props) => {
   function setNote(n, i) {
-    selectNote(n, i);
+    selectingNote(n, i);
   }
   function dltNote(note) {
     if (window.confirm(`Are you sure you want to delete: ${note.title}`)) {
-      deleteNote(note);
+      deletingNote(note);
     }
   }
   const {
@@ -19,9 +20,10 @@ const Sidebaritem = (props) => {
     note,
     classes,
     selectedNoteIndex,
-    selectNote,
-    deleteNote,
+    selectingNote,
+    deletingNote,
   } = props;
+
   return (
     <div key={index}>
       <ListItem
@@ -46,22 +48,5 @@ const Sidebaritem = (props) => {
     </div>
   );
 };
-
-const styles = (theme) => ({
-  listItem: {
-    cursor: "pointer",
-  },
-  textSection: {
-    maxWidth: "85%",
-  },
-  deleteIcon: {
-    position: "absolute",
-    right: "5px",
-    top: "calc(50% - 15px)",
-    "&:hover": {
-      color: "red",
-    },
-  },
-});
 
 export default withStyles(styles)(Sidebaritem);
