@@ -26,6 +26,7 @@ const styles = (theme) => ({
     "&:hover": {
       backgroundColor: "#88a2ce",
     },
+    marginBottom: "5px",
   },
   sidebarContainer: {
     marginTop: "0px",

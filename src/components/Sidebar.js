@@ -37,11 +37,15 @@ const Sidebar = (props) => {
     selectNote,
     newNote,
     deleteNote,
+    handleLogout,
   } = props;
 
   if (notes) {
     return (
       <div className={classes.sidebarContainer}>
+        <Button onClick={handleLogout} className={classes.newNoteBtn}>
+          Log Out?
+        </Button>
         <Button onClick={newNoteBtnClick} className={classes.newNoteBtn}>
           {addingNote ? "Cancel" : "New Note"}
         </Button>
